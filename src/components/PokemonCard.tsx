@@ -27,7 +27,7 @@ export const PokemonCard = ({pokemon}: Props) => {
 
   const goToPokemonPage = () => {
     navigation.navigate('PokemonScreen', {
-      simplePokemon: pokemon,
+      pokemon,
       color: bgColor,
     });
   };
@@ -58,10 +58,8 @@ export const PokemonCard = ({pokemon}: Props) => {
         }}>
         {/* Nombre del pokemon y ID */}
         <View>
-          <Text style={styles.name}>
-            {pokemon.name}
-            {'\n#' + pokemon.id}
-          </Text>
+          <Text
+            style={styles.name}>{`${pokemon.name} \n # ${pokemon.id}`}</Text>
         </View>
 
         <View style={styles.pokebolaContainer}>
