@@ -7,3 +7,4 @@ this app emulates a pokedex-like app
 - infinite scroll
 - axios
 - navigation
+- vector icons
