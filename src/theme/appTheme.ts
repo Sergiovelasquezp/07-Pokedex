@@ -19,4 +19,12 @@ export const theme = StyleSheet.create({
     fontSize: 35,
     fontWeight: 'bold',
   },
+  titles: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+  },
+  elementsPaddingTop: {
+    paddingTop: 20,
+  },
 });
