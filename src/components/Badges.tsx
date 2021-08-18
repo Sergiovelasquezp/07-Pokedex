@@ -1,24 +1,45 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Type} from '../interfaces/PokemonDetailsInterface';
+import {Type, Ability, Move} from '../interfaces/PokemonDetailsInterface';
 
 interface Props {
   title?: string;
-  items: Type[];
+  items: Type[] | Ability[] | Move[];
   color?: string;
 }
 export const Badges = ({title, items, color}: Props) => {
+  const [itemData, setItemData] = useState<any>('');
+  const mapItemData = () => {
+    items.forEach(item => {
+      if (item.hasOwnProperty('ability')) {
+        setItemData('ability');
+      }
+      if (item.hasOwnProperty('move')) {
+        setItemData('move');
+      }
+      if (item.hasOwnProperty('type')) {
+        setItemData('type');
+      }
+    });
+    // console.log('itemIndex => ', itemIndex[0]);
+  };
+
+  useEffect(() => {
+    mapItemData();
+    // console.log('itemData => ', itemData);
+  }, [items, itemData]);
+
   return (
-    <View>
+    <View style={{...styles.badgesContainer}}>
       <Text style={{...styles.title}}>{title}</Text>
       <View style={{...styles.badges}}>
-        {items.map(({type}) => (
+        {items.map((item: any) => (
           <Text
             style={{
               ...styles.types,
               backgroundColor: color || '',
             }}>
-            {type.name}
+            {itemData && item[itemData].name}
           </Text>
         ))}
       </View>
@@ -27,6 +48,9 @@ export const Badges = ({title, items, color}: Props) => {
 };
 
 const styles = StyleSheet.create({
+  badgesContainer: {
+    marginTop: 15,
+  },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -35,6 +59,7 @@ const styles = StyleSheet.create({
   badges: {
     flexDirection: 'row',
     flex: 1,
+    flexWrap: 'wrap',
     paddingTop: 10,
   },
   types: {
@@ -43,6 +68,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 5,
     paddingHorizontal: 8,
+    marginVertical: 5,
     marginRight: 10,
   },
 });

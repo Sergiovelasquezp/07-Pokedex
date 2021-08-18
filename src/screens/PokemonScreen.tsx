@@ -24,7 +24,7 @@ export const PokemonScreen = ({navigation, route}: Props) => {
   const {pokemon, color} = route.params;
   const {name, id, picture} = pokemon;
   const {pokemonData, isLoading} = usePokemonDetails(id);
-  console.log(JSON.stringify(pokemonData, null, 4));
+  // console.log(JSON.stringify(pokemonData, null, 4));
   return (
     <View style={{...styles.container}}>
       <View style={{...styles.header, backgroundColor: color}}>
