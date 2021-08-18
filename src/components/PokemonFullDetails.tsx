@@ -12,8 +12,8 @@ interface Props {
 
 export const PokemonFullDetails = ({pokemonDetails, color}: Props) => {
   const {top} = useSafeAreaInsets();
-  const {name, types, abilities, sprites} = pokemonDetails;
-  console.log(types);
+  const {name, types, abilities, sprites, moves} = pokemonDetails;
+  // console.log(types);
   return (
     <ScrollView
       style={{
@@ -23,6 +23,8 @@ export const PokemonFullDetails = ({pokemonDetails, color}: Props) => {
       <View style={{...styles.details, marginTop: top + 440}}>
         <Badges title="types" items={types} color={color} />
         <PokemonSprites title="sprites" sprites={sprites} />
+        <Badges title="abilities" items={abilities} color={color} />
+        <Badges title="moves" items={moves} color={color} />
       </View>
     </ScrollView>
   );
