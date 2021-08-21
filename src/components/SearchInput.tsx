@@ -1,9 +1,21 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, TextInput, View, Platform} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useDebouncedValue} from '../hooks/useDebouncedValue';
 
-export const SearchInput = () => {
+interface Props {
+  onDebounce: (value: string) => void;
+}
+
+export const SearchInput = ({onDebounce}: Props) => {
+  const [textValue, setTextValue] = useState('');
+  const {debouncedValue} = useDebouncedValue(textValue);
+  useEffect(() => {
+    onDebounce(debouncedValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedValue]);
+
   return (
     <View style={{...styles.container}}>
       <View style={{...styles.inputContainer}}>
@@ -15,6 +27,8 @@ export const SearchInput = () => {
           placeholder="Search"
           autoCorrect={false}
           autoCompleteType="off"
+          value={textValue}
+          onChangeText={setTextValue}
         />
         <Icon name="search-outline" size={30} color="grey" />
       </View>
